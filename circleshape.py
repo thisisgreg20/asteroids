@@ -29,5 +29,5 @@ class CircleShape(pygame.sprite.Sprite):
         distance = pygame.math.Vector2.distance_to(p1, p2)
         check = distance <= (r1 + r2)
         if check == True:
-            print("Alert! Collision Detected!")
+            print(f"Alert! Collision Detected P: {p1} A: {p2}")
         return distance <= (r1 + r2)
