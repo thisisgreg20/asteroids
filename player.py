@@ -1,15 +1,13 @@
 from circleshape import *
-from constants import PLAYER_RADIUS,LINE_WIDTH
+from constants import PLAYER_RADIUS,LINE_WIDTH,PLAYER_TURN_SPEED
 
 class Player(CircleShape):
-    def __init__(self, x, y, radius):
-        super().__init__(x, y, PLAYER_RADIUS, LINE_WIDTH)
+    def __init__(self, x, y):
+        super().__init__(x, y, PLAYER_RADIUS)
         self.x = x
         self.y = y
         self.radius = PLAYER_RADIUS
         self.rotation = 0
-        self.pos_list = []
-        self.pos_list.append((self.x + self.y))
 
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -19,10 +17,17 @@ class Player(CircleShape):
         c = self.position - forward * self.radius + right
         return [a, b, c]
     
-    def draw(self, screen, pos_list, LINE_WIDTH):
-        self.__init__(screen, pos_list, LINE_WIDTH)
-        pygame.draw.polygon(screen, "white", pos_list, LINE_WIDTH)
-
+    def draw(self, screen):
+        points = self.triangle()
+        pygame.draw.polygon(screen, "white", points, LINE_WIDTH)
+        
     def update(self, dt):
-        # must override
-        pass
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_a]:
+            self.rotate(dt * -1)
+        if keys[pygame.K_d]:
+            self.rotate(dt)
+
+    def rotate(self, dt):
+        self.rotation += PLAYER_TURN_SPEED * dt
