@@ -1,4 +1,6 @@
 import pygame
+import sys
+from logger import log_event
 
 # Base class for game objects
 class CircleShape(pygame.sprite.Sprite):
@@ -29,5 +31,7 @@ class CircleShape(pygame.sprite.Sprite):
         distance = pygame.math.Vector2.distance_to(p1, p2)
         check = distance <= (r1 + r2)
         if check == True:
-            print(f"Alert! Collision Detected P: {p1} A: {p2}")
+            log_event("player_hit")
+            print("Game over!")
+            sys.exit()
         return distance <= (r1 + r2)
