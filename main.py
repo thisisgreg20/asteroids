@@ -12,6 +12,12 @@ def main():
     pygame.init()
     clock = pygame.time.Clock()
     dt = 0
+    
+    # Groups
+    drawable = pygame.sprite.Group()
+    updatable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
+
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     
@@ -23,8 +29,9 @@ def main():
 
         dt = clock.tick(FPS_CAP) / 1000 # Sets max FPS, adjust in constants.py
         screen.fill("black")
-        player.update(dt)
-        player.draw(screen)
+        updatable.update(dt)
+        for i in drawable:
+            i.draw(screen)
         pygame.display.flip()
 
 
