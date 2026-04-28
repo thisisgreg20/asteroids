@@ -1,6 +1,6 @@
 import pygame
 from constants import *
-from logger import log_state
+from logger import log_state,log_event
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
@@ -33,8 +33,10 @@ def main():
         dt = clock.tick(FPS_CAP) / 1000
         screen.fill("black")
         updatable.update(dt)
-        for i in drawable:
-            i.draw(screen)
+        for other in asteroids:
+            player.collides_with(other)
+        for obj in drawable:
+            obj.draw(screen)
         pygame.display.flip()
 
 
