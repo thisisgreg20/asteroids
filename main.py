@@ -39,10 +39,16 @@ def main():
         dt = clock.tick(FPS_CAP) / 1000
         screen.fill("black")
         updatable.update(dt)
+        
         for other in asteroids:
             player.collides_with(other)
-        for obj in drawable:
-            obj.draw(screen)
+        
+        for asteroid in asteroids:
+            for shot in shots:
+                shot.shot_hits(asteroid)
+        
+        for sprites in drawable:
+            sprites.draw(screen)
         pygame.display.flip()
 
 

@@ -10,6 +10,7 @@ class Player(CircleShape):
         self.y = y
         self.radius = PLAYER_RADIUS
         self.rotation = 0
+        self.shot_gcd = 0
 
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -26,18 +27,17 @@ class Player(CircleShape):
     def update(self, dt):
         keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_w]:
+        if keys[pygame.K_w]: # Move forward
             self.move(dt)
-        if keys[pygame.K_a]:
+        if keys[pygame.K_a]: # Rotate left / counter-clockwise
             self.rotate(dt * -1)
-        if keys[pygame.K_s]:
+        if keys[pygame.K_s]: # Move backwards
             self.move(dt * -1)
-        if keys[pygame.K_d]:
+        if keys[pygame.K_d]: # Rotate right / clockwise
             self.rotate(dt)
-        if keys[pygame.K_SPACE]:
+        if keys[pygame.K_SPACE]: # Shoot
             self.shoot()
-        if keys[pygame.K_r]:
-            # set keybind (r) to reset position back to center of screen.
+        if keys[pygame.K_r]: # Reset player position
             self.position = pygame.Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
     def rotate(self, dt):
@@ -48,12 +48,15 @@ class Player(CircleShape):
         rotated_vector = unit_vector.rotate(self.rotation)
         rotated_with_speed_vector = rotated_vector * PLAYER_SPEED * dt
         self.position += rotated_with_speed_vector
+        self.shot_gcd -= dt
 
     def shoot(self):
+        if self.shot_gcd > 0: # Limits shots cooldown
+            return
         shot = Shot(self.position.x, self.position.y)
         unit_vector = pygame.Vector2(0, 1)
         rotated_vector = unit_vector.rotate(self.rotation)
         rotated_with_speed_vector = rotated_vector * PLAYER_SHOOT_SPEED
         shot.velocity = rotated_with_speed_vector
-        print(f"Debug: Shot location: {self.position}")
+        self.shot_gcd = PLAYER_SHOOT_COOLDOWN_SECONDS
         

@@ -33,6 +33,5 @@ class CircleShape(pygame.sprite.Sprite):
         if check == True:
             log_event("player_hit")
             print("Game over!")
-            #print(f"DANGER! HIT DETECTED! AT {p2}") # Used for debugging collision detection
             sys.exit()
-        return distance <= (r1 + r2)
+        return check
