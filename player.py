@@ -37,6 +37,9 @@ class Player(CircleShape):
             self.rotate(dt)
         if keys[pygame.K_SPACE]: # Shoot
             self.shoot()
+        if keys[pygame.K_ESCAPE]: # Quit game
+            print("ESC key hit - Exiting game")
+            pygame.quit()
         if keys[pygame.K_r]: # Reset player position
             self.position = pygame.Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 

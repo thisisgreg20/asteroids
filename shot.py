@@ -23,6 +23,7 @@ class Shot(CircleShape):
         check = distance <= (r1 + r2)
         if check == True:
             log_event("asteroid_shot")
+            # call asteroid.spawn() here
             pygame.sprite.Sprite.kill(self)
             pygame.sprite.Sprite.kill(other)
         return check
