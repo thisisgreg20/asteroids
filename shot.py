@@ -19,11 +19,10 @@ class Shot(CircleShape):
         r2 = other.radius
         p1 = self.position
         p2 = other.position
+        p2_x, p2_y = p2
         distance = pygame.math.Vector2.distance_to(p1, p2)
         check = distance <= (r1 + r2)
         if check == True:
             log_event("asteroid_shot")
-            # call asteroid.spawn() here
-            pygame.sprite.Sprite.kill(self)
-            pygame.sprite.Sprite.kill(other)
+            other.split()
         return check

@@ -1,4 +1,5 @@
 import pygame
+import sys
 from circleshape import CircleShape
 from shot import Shot
 from constants import *
@@ -38,8 +39,9 @@ class Player(CircleShape):
         if keys[pygame.K_SPACE]: # Shoot
             self.shoot()
         if keys[pygame.K_ESCAPE]: # Quit game
-            print("ESC key hit - Exiting game")
+            print("ESC key pressed - Exiting game")
             pygame.quit()
+            sys.exit()
         if keys[pygame.K_r]: # Reset player position
             self.position = pygame.Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 

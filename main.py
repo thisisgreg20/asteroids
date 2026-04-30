@@ -15,7 +15,6 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
     
-### Groups ###
     asteroids = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     shots = pygame.sprite.Group()
@@ -24,7 +23,6 @@ def main():
     AsteroidField.containers = (updatable)
     Player.containers = (drawable, updatable)
     Shot.containers = (drawable, shots, updatable)
-### ###### ###
 
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -40,12 +38,12 @@ def main():
         screen.fill("black")
         updatable.update(dt)
         
-        for other in asteroids:
-            player.collides_with(other)
+        for rock in asteroids:
+            player.collides_with(rock)
         
-        for asteroid in asteroids:
-            for shot in shots:
-                shot.shot_hits(asteroid)
+        for rock in asteroids:
+            for bullet in shots:
+                bullet.shot_hits(rock)
         
         for sprites in drawable:
             sprites.draw(screen)
