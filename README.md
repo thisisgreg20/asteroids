@@ -1,3 +1,7 @@
+<p align="left">
+  <img src="https://api.boot.dev/v1/users/public/aa3d3d2d-91b2-47db-9f2f-d31f0a502d4b/thumbnail" >
+</p>
+
 # Asteroids Clone
 
 A high-fidelity 2D arcade shooter built with Python and Pygame. Navigate your spaceship through a perilous asteroid field, using your laser to destroy obstacles before they destroy you.
